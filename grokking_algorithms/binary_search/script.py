@@ -3,14 +3,14 @@
 # Needs to receive a sorted list of elements, if the element we need is found, we return its position, otherwise null would come in handy.
 # In a case where i'm searching through a list of 240.000 names, going one by one may end needing to do 240.000 comparisons before finding out my number, while with binary search i could cut this down to 18 searches.
 
-names = ["Anderson", "Carlson", "Marcus", "Bridgett" "Carlyle", "Karen"]
+names = ["Anderson", "Carlson", "Marcus", "Bridgett", "Carlyle", "Karen"]
 letters = ["A", "C", "M", "B", "K"]
 numbers = [9, 5, 3, 7, 1, 2]
 def binary_search(list, item):
     list.sort()
 
-    low = 0
-    high = len(list)-1
+    low = 0                     #list lower index
+    high = len(list)-1          #list higher index
 
     while low <= high:
         mid = (low + high)
@@ -25,6 +25,7 @@ def binary_search(list, item):
 
 print (binary_search(numbers, 3)) # Should return 2
 print (binary_search(letters, "K")) # Should return 3
+print (binary_search(names, "Marcus"))# Should return 5
 
 # Question Time!
 # 1. Suppose you have a sorted list of 128 names, and you're searching through it using binary search. What's the maximum number of steps it would take?

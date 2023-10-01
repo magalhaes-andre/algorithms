@@ -30,6 +30,7 @@ class TownProblem {
         System.out.println(solve(rainRegistry));
     }
 
+    //TODO: Evaluate current solution on Big O
     public static int solve(String input) {
         char[] characters = input.toCharArray();
         int currentCounter = 0;

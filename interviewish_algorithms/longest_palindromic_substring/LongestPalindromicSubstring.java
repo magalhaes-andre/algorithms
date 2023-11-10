@@ -7,7 +7,7 @@ public class LongestPalindromicSubstring {
     public static void main(String[] args) {
         String input = "forgeeksskeegfor";
         System.out.println(bruteForceApproach(input));
-        System.out.println(dynamicApproach(input));
+        System.out.println(longestPalindrome(input));
     }
 
 //    Create a 2-D array to fill the array with appropriate steps.
@@ -56,38 +56,34 @@ public class LongestPalindromicSubstring {
 //      finally we will keep incrementing ‘high’ and decrementing ‘low’ until str[low]==str[high].
 //      calculate length=high-low-1, if length > maxLength then maxLength = length and start = low+1 .
 //    Print the LPS and return maxLength.
-    //TODO: fix
-    public static String dynamicApproach(String input) {
-        int inputLength = input.length();
-        if (inputLength < 2) {
-            return input;
-        }
-        int maxLength = 1;
+    public static String longestPalindrome(String input) {
+        if (input == null || input.length() < 1) return "";
+
         int start = 0;
-        int low = 0;
-        int high = 0;
+        int end = 0;
 
-        for (int iteration = 0; iteration < inputLength; iteration++) {
-            low = iteration - 1;
-            high = iteration + 1;
-            while (high < inputLength && input.charAt(high) == input.charAt(iteration)) {
-                high++;
-            }
-            while (low >= 0 && input.charAt(low) == input.charAt(iteration)) {
-                low--;
-            }
-            while (low >= 0 && high < inputLength && input.charAt(low) == input.charAt(high)) {
-                low--;
-                high++;
+        for (int i = 0; i < input.length(); i++) {
+            int evenLength = expandFromMiddle(input, i, i);
+            int oddLength = expandFromMiddle(input, i, i+1);
+            int length = Math.max(evenLength, oddLength);
+            if (length > end - start) {
+                start = i - ((length - 1) / 2);
+                end = i + (length / 2);
             }
         }
+        return input.substring(start, end + 1);
+    }
 
-        int length = high - low - 1;
-        if (maxLength < length) {
-            maxLength = length;
-            start = low + 1;
+    private static int expandFromMiddle(String s, int left, int right) {
+        if (s == null || left > right) {
+            return 0;
         }
 
-        return input.substring(start, start + maxLength);
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+
+        return right - left - 1;
     }
 }

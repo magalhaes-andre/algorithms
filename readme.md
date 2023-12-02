@@ -6,10 +6,9 @@ By any means this should be stated as the silver bullet in solving some of the i
 in a way that made sense, was clear or seemed elegant enough.
 
 ## Repository Structure:
-
-- root
-  - source_of_knowledge
-    - name_of_the_algorithm
-      - implementation file
+```
+├───source_of_knowledge
+│   ├───algorithm_to_be_implemented
+````
         
 _This repository is agnostic although it will be starting strongly with Java._
